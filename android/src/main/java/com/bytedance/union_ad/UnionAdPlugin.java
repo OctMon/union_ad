@@ -27,7 +27,7 @@ public class UnionAdPlugin implements FlutterPlugin, MethodCallHandler, Activity
 
   private MethodChannel channel;
   private Activity context;
-  RewardVideo rewardVideo;
+  private RewardVideo rewardVideo;
 
   public void registerWith(Registrar registrar) {
     TTAdManagerHolder.init(registrar.activity().getApplicationContext());

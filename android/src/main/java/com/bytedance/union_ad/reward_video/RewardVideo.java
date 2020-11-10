@@ -17,9 +17,13 @@ import com.bytedance.union_ad.config.TTAdManagerHolder;
 public class RewardVideo {
 
     private static final String TAG = "RewardVideo";
-    private boolean mIsLoaded = false; //视频是否加载完成
+    /**视频是否加载完成*/
+    private boolean mIsLoaded = false; 
+    /**是否请求模板广告*/
     private boolean mIsExpress = false;
+    /**收否有正在下载的apk*/
     private boolean mHasShowDownloadActive = false;
+    
     private TTRewardVideoAd mttRewardVideoAd;
     private TTAdNative mTTAdNative;
     private Context context;
@@ -50,7 +54,7 @@ public class RewardVideo {
                     .setCodeId(codeId)
                     .build();
         }
-        //step5:请求广告
+        ///step5:请求广告
         mTTAdNative.loadRewardVideoAd(adSlot, new TTAdNative.RewardVideoAdListener() {
             @Override
             public void onError(int code, String message) {
@@ -70,7 +74,6 @@ public class RewardVideo {
             @Override
             public void onRewardVideoAdLoad(TTRewardVideoAd ad) {
                 Log.e(TAG, "Callback --> onRewardVideoAdLoad");
-
                 TToast.show(context, "rewardVideoAd loaded 广告类型：" + getAdType(ad.getRewardVideoAdType()));
                 mIsLoaded = false;
                 mttRewardVideoAd = ad;
