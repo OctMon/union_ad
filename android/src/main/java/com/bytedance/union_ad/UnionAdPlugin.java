@@ -57,10 +57,10 @@ public class UnionAdPlugin implements FlutterPlugin, MethodCallHandler, Activity
       String codeId = call.argument("codeIdAndroid");
       rewardVideo.loadAd(codeId);
     }else if(call.method.equals("showRewardVideo")){
-      if (rewardVideo == null){
-        rewardVideo = new RewardVideo(context,this);
+      if (rewardVideo != null){
+        rewardVideo.showAd();
       }
-      rewardVideo.showAd();
+
     } else {
       result.notImplemented();
     }
