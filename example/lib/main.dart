@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
             Text(_status),
             RaisedButton(
               onPressed: () {
-                UnionAd.loadRewardVideo(codeIdAndroid:testRewardCodeIdAndroid,);
+                UnionAd.loadRewardVideo(codeIdAndroid:testRewardCodeIdAndroid,codeIdIos: testRewardCodeIdIos);
               },
               child: Text('加载激励视频广告'),
             ),
