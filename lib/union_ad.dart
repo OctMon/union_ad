@@ -23,10 +23,12 @@ class UnionAd {
     });
   }
 
-  static Future<bool> loadRewardVideo() async {
-    return await _channel.invokeMethod('loadRewardVideo');
+  ///加载激励视频广告
+  static Future<bool> loadRewardVideo({@required String codeIdAndroid, @required String codeIdIos}) async {
+    return await _channel.invokeMethod('loadRewardVideo',{"codeIdAndroid":codeIdAndroid??'','codeIdIos':codeIdIos??''});
   }
 
+  ///展示激励视频广告
   static Future<bool> showRewardVideo() async {
     return await _channel.invokeMethod('showRewardVideo');
   }

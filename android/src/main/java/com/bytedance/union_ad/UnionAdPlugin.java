@@ -30,7 +30,6 @@ public class UnionAdPlugin implements FlutterPlugin, MethodCallHandler, Activity
   private RewardVideo rewardVideo;
 
   public void registerWith(Registrar registrar) {
-    TTAdManagerHolder.init(registrar.activity().getApplicationContext());
     UnionAdPlugin plugin = new UnionAdPlugin();
     plugin.context = registrar.activity();
     plugin.channel = new MethodChannel(registrar.messenger(), channelName);
@@ -39,7 +38,6 @@ public class UnionAdPlugin implements FlutterPlugin, MethodCallHandler, Activity
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-    TTAdManagerHolder.init(flutterPluginBinding.getApplicationContext());
     channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), channelName);
     channel.setMethodCallHandler(this);
   }
@@ -48,11 +46,19 @@ public class UnionAdPlugin implements FlutterPlugin, MethodCallHandler, Activity
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
     if (call.method.equals("getPlatformVersion")) {
       result.success("Android " + android.os.Build.VERSION.RELEASE);
+    }else if(call.method.equals("register")){
+      String appId = call.argument("androidAppId");
+      String appName = call.argument("appName");
+      boolean debug = call.argument("debug");
+
+      TTAdManagerHolder.init(context.getApplicationContext(), appId, appName, debug);
+
     }else if(call.method.equals("loadRewardVideo")){
       if (rewardVideo == null){
         rewardVideo = new RewardVideo(context);
       }
-      rewardVideo.loadAd("901121365");
+      String codeId = call.argument("codeId");
+      rewardVideo.loadAd(codeId);
     }else if(call.method.equals("showRewardVideo")){
       if (rewardVideo == null){
         rewardVideo = new RewardVideo(context);
