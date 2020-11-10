@@ -25,11 +25,11 @@ public class UnionAdPlugin implements FlutterPlugin, MethodCallHandler, Activity
   private Activity context;
   private RewardVideo rewardVideo;
 
-  public void registerWith(Registrar registrar) {
+  public static void registerWith(Registrar registrar) {
     UnionAdPlugin plugin = new UnionAdPlugin();
     plugin.context = registrar.activity();
     plugin.channel = new MethodChannel(registrar.messenger(), channelName);
-    plugin.channel.setMethodCallHandler(this);
+    plugin.channel.setMethodCallHandler(plugin);
   }
 
   @Override
@@ -41,9 +41,7 @@ public class UnionAdPlugin implements FlutterPlugin, MethodCallHandler, Activity
   @Override
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
 
-    if (call.method.equals("getPlatformVersion")) {
-      result.success("Android " + android.os.Build.VERSION.RELEASE);
-    }else if(call.method.equals("registerAd")){
+    if(call.method.equals("registerAd")){
       String appId = call.argument("androidAppId");
       String appName = call.argument("appName");
       boolean debug = call.argument("debug");
