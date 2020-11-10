@@ -15,8 +15,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _status = 'Unknown';
 
+  ///官方测试id
   String testAppIdAndroid = '5001121';
   String testRewardCodeIdAndroid = '901121365';
+  String testAppIdIos = '5000546';
+  String testRewardCodeIdIos = '900546826';
 
   @override
   void initState() {
@@ -25,8 +28,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initRegister() async {
-
-    await UnionAd.register(iosAppId: '5000546', androidAppId: testAppIdAndroid,debug: true);
+    await UnionAd.register(iosAppId: testAppIdIos, androidAppId: testAppIdAndroid,debug: true);
     setState(() {
       _status = "Success";
     });

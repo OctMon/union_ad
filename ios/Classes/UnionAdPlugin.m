@@ -14,13 +14,13 @@
     NSDictionary *arguments = call.arguments;
       
     if ([@"register" isEqualToString:call.method]) {
-        BUAdSDKLogLevel logLevel = arguments[@"debug"] ? BUAdSDKLogLevelDebug : BUAdSDKLogLevelNone;
+        BUAdSDKLogLevel logLevel = [arguments[@"debug"] boolValue] ? BUAdSDKLogLevelDebug : BUAdSDKLogLevelNone;
         // Whether to open log. default is none.
         [BUAdSDKManager setLoglevel:logLevel];
         // BUAdSDK requires iOS 9 and up
-        [BUAdSDKManager setAppID:arguments[@"debug"]];
+        [BUAdSDKManager setAppID:arguments[@"iosAppId"]];
           
-        result(@true);
+        result(@YES);
     } else {
         result(FlutterMethodNotImplemented);
     }
