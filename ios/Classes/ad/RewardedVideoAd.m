@@ -60,6 +60,7 @@
 }
 
 - (void)rewardedVideoAdDidVisible:(BURewardedVideoAd *)rewardedVideoAd{
+    [UIApplication.sharedApplication setStatusBarHidden:YES];
     [_unionAdChannel invokeMethod:@"showed" arguments:nil result:nil];
     BUD_Log(@"%s",__func__);
 }
@@ -69,6 +70,7 @@
 }
 
 - (void)rewardedVideoAdDidClose:(BURewardedVideoAd *)rewardedVideoAd {
+    [UIApplication.sharedApplication setStatusBarHidden:NO];
     [_unionAdChannel invokeMethod:@"close" arguments:nil result:nil];
     BUD_Log(@"%s",__func__);
 }
