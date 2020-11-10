@@ -22,14 +22,25 @@ public class UnionAdPlugin implements FlutterPlugin, MethodCallHandler, Activity
   ///
   /// This local reference serves to register the plugin with the Flutter Engine and unregister it
   /// when the Flutter Engine is detached from the Activity
+
+  private static String channelName = "union_ad";
+
   private MethodChannel channel;
   private Activity context;
   RewardVideo rewardVideo;
 
+  public void registerWith(Registrar registrar) {
+    TTAdManagerHolder.init(registrar.activity().getApplicationContext());
+    UnionAdPlugin plugin = new UnionAdPlugin();
+    plugin.context = registrar.activity();
+    plugin.channel = new MethodChannel(registrar.messenger(), channelName);
+    plugin.channel.setMethodCallHandler(this);
+  }
+
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
     TTAdManagerHolder.init(flutterPluginBinding.getApplicationContext());
-    channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "union_ad");
+    channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), channelName);
     channel.setMethodCallHandler(this);
   }
 
@@ -41,7 +52,7 @@ public class UnionAdPlugin implements FlutterPlugin, MethodCallHandler, Activity
       if (rewardVideo == null){
         rewardVideo = new RewardVideo(context);
       }
-      rewardVideo.loadAd("901121430");
+      rewardVideo.loadAd("901121365");
     }else if(call.method.equals("showRewardVideo")){
       if (rewardVideo == null){
         rewardVideo = new RewardVideo(context);
