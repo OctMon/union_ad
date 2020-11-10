@@ -1,4 +1,5 @@
 #import "UnionAdPlugin.h"
+#import <BUAdSDK/BUAdSDK.h>
 
 @implementation UnionAdPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
@@ -10,11 +11,19 @@
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
-  if ([@"getPlatformVersion" isEqualToString:call.method]) {
-    result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
-  } else {
-    result(FlutterMethodNotImplemented);
-  }
+    NSDictionary *arguments = call.arguments;
+      
+    if ([@"register" isEqualToString:call.method]) {
+        BUAdSDKLogLevel logLevel = arguments[@"debug"] ? BUAdSDKLogLevelDebug : BUAdSDKLogLevelNone;
+        // Whether to open log. default is none.
+        [BUAdSDKManager setLoglevel:logLevel];
+        // BUAdSDK requires iOS 9 and up
+        [BUAdSDKManager setAppID:arguments[@"debug"]];
+          
+        result(@true);
+    } else {
+        result(FlutterMethodNotImplemented);
+    }
 }
 
 @end

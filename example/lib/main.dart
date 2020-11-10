@@ -14,31 +14,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  String _status = 'Unknown';
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    initRegister();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      platformVersion = await UnionAd.platformVersion;
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
+  Future<void> initRegister() async {
+    await UnionAd.register(iosAppId: '5000546', androidAppId: '5118122');
     setState(() {
-      _platformVersion = platformVersion;
+      _status = "Success";
     });
   }
 
@@ -49,19 +36,23 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Column(children: [
-
-
-          RaisedButton(onPressed: (){
-            UnionAd.loadRewardVideo();
-          },child: Text('加载激励视频广告'),),
-
-          RaisedButton(onPressed: (){
-            UnionAd.showRewardVideo();
-          },child: Text('展示激励视频广告'),),
-
-
-        ],),
+        body: Column(
+          children: [
+            Text(_status),
+            RaisedButton(
+              onPressed: () {
+                UnionAd.loadRewardVideo();
+              },
+              child: Text('加载激励视频广告'),
+            ),
+            RaisedButton(
+              onPressed: () {
+                UnionAd.showRewardVideo();
+              },
+              child: Text('展示激励视频广告'),
+            ),
+          ],
+        ),
       ),
     );
   }
