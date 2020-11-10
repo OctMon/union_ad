@@ -28,10 +28,13 @@ public class RewardVideo {
     private TTAdNative mTTAdNative;
     private Context context;
 
-    public RewardVideo(Context con){
+    private RewardVideoCallback callback;
+
+    public RewardVideo(Context con,RewardVideoCallback call){
         this.context = con;
         TTAdManager ttAdManager = TTAdManagerHolder.get();
         mTTAdNative = ttAdManager.createAdNative(context.getApplicationContext());
+        callback = call;
     }
 
     /**
@@ -62,6 +65,9 @@ public class RewardVideo {
                     Log.e(TAG, "Callback --> onError: " + code + ", " + String.valueOf(message));
                     TToast.show(context, message);
                 }
+                if (callback != null){
+                    callback.loadError();
+                }
 
             }
 
@@ -73,6 +79,9 @@ public class RewardVideo {
                     TToast.show(context, "Callback --> rewardVideoAd video cached");
                 }
                 mIsLoaded = true;
+                if (callback != null){
+                    callback.cached();
+                }
             }
 
             //视频广告的素材加载完毕，比如视频url等，在此回调后，可以播放在线视频，网络不好可能出现加载缓冲，影响体验。
@@ -82,7 +91,9 @@ public class RewardVideo {
                     Log.e(TAG, "Callback --> onRewardVideoAdLoad");
                     TToast.show(context, "rewardVideoAd loaded 广告类型：" + getAdType(ad.getRewardVideoAdType()));
                 }
-
+                if (callback != null){
+                    callback.loaded();
+                }
                 mIsLoaded = false;
                 mttRewardVideoAd = ad;
                 mttRewardVideoAd.setRewardAdInteractionListener(new TTRewardVideoAd.RewardAdInteractionListener() {
@@ -92,6 +103,9 @@ public class RewardVideo {
                         if (TTAdManagerHolder.debug){
                             Log.d(TAG, "Callback --> rewardVideoAd show");
                             TToast.show(context, "rewardVideoAd show");
+                        }
+                        if (callback != null){
+                            callback.showed();
                         }
 
                     }
@@ -112,6 +126,10 @@ public class RewardVideo {
                             TToast.show(context, "rewardVideoAd close");
                         }
 
+                        if (callback != null){
+                            callback.closed();
+                        }
+
                     }
 
                     //视频播放完成回调
@@ -120,6 +138,9 @@ public class RewardVideo {
                         if (TTAdManagerHolder.debug){
                             Log.d(TAG, "Callback --> rewardVideoAd complete");
                             TToast.show(context, "rewardVideoAd complete");
+                        }
+                        if (callback != null){
+                            callback.playComplete();
                         }
 
                     }
@@ -144,6 +165,10 @@ public class RewardVideo {
                             TToast.show(context, logString);
                         }
 
+                        if (callback != null){
+                            callback.rewarded();
+                        }
+
                     }
 
                     @Override
@@ -152,7 +177,9 @@ public class RewardVideo {
                             Log.e(TAG, "Callback --> rewardVideoAd has onSkippedVideo");
                             TToast.show(context, "rewardVideoAd has onSkippedVideo");
                         }
-
+                        if (callback != null){
+                            callback.skip();
+                        }
                     }
                 });
                 mttRewardVideoAd.setDownloadListener(new TTAppDownloadListener() {
@@ -240,8 +267,24 @@ public class RewardVideo {
             mttRewardVideoAd = null;
             mIsLoaded = false;
         } else {
-            TToast.show(context, "请先加载广告");
+           if (TTAdManagerHolder.debug){
+               TToast.show(context, "请先加载广告");
+           }
         }
+    }
+
+    /**
+     * 激励视频加载及播放监听
+     */
+    public interface RewardVideoCallback{
+        public void loadError();
+        public void loaded();
+        public void cached();
+        public void showed();
+        public void skip();
+        public void rewarded();
+        public void playComplete();
+        public void closed();
     }
 
 }

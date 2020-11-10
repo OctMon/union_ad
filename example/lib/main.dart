@@ -28,10 +28,21 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initRegister() async {
-    await UnionAd.registerAd(iosAppId: testAppIdIos, androidAppId: testAppIdAndroid,debug: true);
+    await UnionAd.registerAd(
+        iosAppId: testAppIdIos, androidAppId: testAppIdAndroid, debug: true);
     setState(() {
       _status = "Success";
     });
+    UnionAd.registerRewardAdCallback(
+      loadError: (){},
+      loaded: () {},
+      cached: () {},
+      showed: () {},
+      skip: () {},
+      rewarded: () {},
+      playComplete: () {},
+      closed: () {},
+    );
   }
 
   @override
@@ -46,7 +57,9 @@ class _MyAppState extends State<MyApp> {
             Text(_status),
             RaisedButton(
               onPressed: () {
-                UnionAd.loadRewardVideo(codeIdAndroid:testRewardCodeIdAndroid,codeIdIos: testRewardCodeIdIos);
+                UnionAd.loadRewardVideo(
+                    codeIdAndroid: testRewardCodeIdAndroid,
+                    codeIdIos: testRewardCodeIdIos);
               },
               child: Text('加载激励视频广告'),
             ),

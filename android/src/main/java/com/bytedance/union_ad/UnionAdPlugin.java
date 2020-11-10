@@ -17,11 +17,7 @@ import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /** UnionAdPlugin */
-public class UnionAdPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
-  /// The MethodChannel that will the communication between Flutter and native Android
-  ///
-  /// This local reference serves to register the plugin with the Flutter Engine and unregister it
-  /// when the Flutter Engine is detached from the Activity
+public class UnionAdPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware, RewardVideo.RewardVideoCallback {
 
   private static String channelName = "union_ad";
 
@@ -44,6 +40,7 @@ public class UnionAdPlugin implements FlutterPlugin, MethodCallHandler, Activity
 
   @Override
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
+
     if (call.method.equals("getPlatformVersion")) {
       result.success("Android " + android.os.Build.VERSION.RELEASE);
     }else if(call.method.equals("registerAd")){
@@ -55,13 +52,13 @@ public class UnionAdPlugin implements FlutterPlugin, MethodCallHandler, Activity
 
     }else if(call.method.equals("loadRewardVideo")){
       if (rewardVideo == null){
-        rewardVideo = new RewardVideo(context);
+        rewardVideo = new RewardVideo(context,this);
       }
       String codeId = call.argument("codeIdAndroid");
       rewardVideo.loadAd(codeId);
     }else if(call.method.equals("showRewardVideo")){
       if (rewardVideo == null){
-        rewardVideo = new RewardVideo(context);
+        rewardVideo = new RewardVideo(context,this);
       }
       rewardVideo.showAd();
     } else {
@@ -94,4 +91,43 @@ public class UnionAdPlugin implements FlutterPlugin, MethodCallHandler, Activity
 
   }
 
+  @Override
+  public void loadError() {
+    channel.invokeMethod("loadError",null);
+  }
+
+  @Override
+  public void loaded() {
+    channel.invokeMethod("loaded",null);
+  }
+
+  @Override
+  public void cached() {
+    channel.invokeMethod("cached",null);
+  }
+
+  @Override
+  public void showed() {
+    channel.invokeMethod("showed",null);
+  }
+
+  @Override
+  public void skip() {
+    channel.invokeMethod("skip",null);
+  }
+
+  @Override
+  public void rewarded() {
+    channel.invokeMethod("rewarded",null);
+  }
+
+  @Override
+  public void playComplete() {
+    channel.invokeMethod("playComplete",null);
+  }
+
+  @Override
+  public void closed() {
+    channel.invokeMethod("closed",null);
+  }
 }
