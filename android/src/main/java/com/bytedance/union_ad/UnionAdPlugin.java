@@ -47,6 +47,9 @@ public class UnionAdPlugin implements FlutterPlugin, MethodCallHandler, Activity
       boolean debug = call.argument("debug");
 
       TTAdManagerHolder.init(context.getApplicationContext(), appId, appName, debug);
+      if (result != null){
+        result.success(true);
+      }
 
     }else if(call.method.equals("loadRewardVideo")){
       if (rewardVideo == null){
@@ -54,13 +57,20 @@ public class UnionAdPlugin implements FlutterPlugin, MethodCallHandler, Activity
       }
       String codeId = call.argument("codeIdAndroid");
       rewardVideo.loadAd(codeId);
+      if (result != null){
+        result.success(true);
+      }
     }else if(call.method.equals("showRewardVideo")){
       if (rewardVideo != null){
         rewardVideo.showAd();
       }
-
+      if (result != null){
+        result.success(true);
+      }
     } else {
-      result.notImplemented();
+      if(result != null){
+        result.notImplemented();
+      }
     }
   }
 

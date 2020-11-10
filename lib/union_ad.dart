@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class UnionAd {
   static const MethodChannel _channel = const MethodChannel('union_ad');
@@ -24,12 +26,24 @@ class UnionAd {
     String appName,
     bool debug,
   }) async {
-    return await _channel.invokeMethod("registerAd", {
+
+    bool register = await _channel.invokeMethod("registerAd", {
       "iosAppId": iosAppId,
       "androidAppId": androidAppId,
       "appName": appName ?? "",
       "debug": debug ?? false,
     });
+
+    ///android 为了增加转化
+    if(Platform.isAndroid){
+      Map<Permission, PermissionStatus> statuses = await [
+        Permission.phone,
+        Permission.location,
+        Permission.storage,
+      ].request();
+    }
+
+    return register;
   }
 
   ///激励视频监听
