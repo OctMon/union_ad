@@ -11,4 +11,14 @@ class UnionAd {
     final String version = await _channel.invokeMethod('getPlatformVersion');
     return version;
   }
+
+  static Future<bool> loadRewardVideo() async {
+    await _channel.invokeMethod('loadRewardVideo');
+
+  }
+
+  static Future<bool> showRewardVideo() async {
+    await _channel.invokeMethod('showRewardVideo');
+  }
+
 }

@@ -49,9 +49,19 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
-        ),
+        body: Column(children: [
+
+
+          RaisedButton(onPressed: (){
+            UnionAd.loadRewardVideo();
+          },child: Text('加载激励视频广告'),),
+
+          RaisedButton(onPressed: (){
+            UnionAd.showRewardVideo();
+          },child: Text('展示激励视频广告'),),
+
+
+        ],),
       ),
     );
   }
