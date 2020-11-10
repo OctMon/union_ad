@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initRegister() async {
-    await UnionAd.register(iosAppId: '5000546', androidAppId: '5118122');
+    await UnionAd.register(iosAppId: '5000546', androidAppId: '5118122', debug: true);
     setState(() {
       _status = "Success";
     });
