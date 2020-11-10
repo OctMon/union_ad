@@ -10,8 +10,10 @@
 
 @implementation UnionAdPlugin
 
+static FlutterMethodChannel* channel;
+
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
-  FlutterMethodChannel* channel = [FlutterMethodChannel
+  channel = [FlutterMethodChannel
       methodChannelWithName:@"union_ad"
             binaryMessenger:[registrar messenger]];
   UnionAdPlugin* instance = [[UnionAdPlugin alloc] init];
@@ -21,7 +23,7 @@
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
     NSDictionary *arguments = call.arguments;
       
-    if ([@"register" isEqualToString:call.method]) {
+    if ([@"registerAd" isEqualToString:call.method]) {
         BUAdSDKLogLevel logLevel = [arguments[@"debug"] boolValue] ? BUAdSDKLogLevelDebug : BUAdSDKLogLevelNone;
         // Whether to open log. default is none.
         [BUAdSDKManager setLoglevel:logLevel];
@@ -32,9 +34,8 @@
     } else if ([@"loadRewardVideo" isEqualToString:call.method]) {
         BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
     //    model.userId = @"123";
-        self.rewardedVideoAd = [[RewardedVideoAd alloc] initWithSlotID:arguments[@"codeIdIos"] rewardedVideoModel:model];
+        self.rewardedVideoAd = [[RewardedVideoAd alloc] initWithSlotID:arguments[@"codeIdIos"] rewardedVideoModel:model unionAdChannel:channel];
         [self.rewardedVideoAd loadAdData];
-        result(@YES);
         
     } else if ([@"showRewardVideo" isEqualToString:call.method]) {
         [self.rewardedVideoAd showRewardVideo];

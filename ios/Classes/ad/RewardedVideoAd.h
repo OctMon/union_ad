@@ -6,13 +6,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Flutter/Flutter.h>
 #import <BUAdSDK/BUAdSDK.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RewardedVideoAd : NSObject
 
-- (instancetype)initWithSlotID:(NSString *)slotID rewardedVideoModel:(BURewardedVideoModel *)model;
+- (instancetype)initWithSlotID:(NSString *)slotID rewardedVideoModel:(BURewardedVideoModel *)model unionAdChannel:(FlutterMethodChannel *)unionAdChannel;
 
 - (void)loadAdData;
 
