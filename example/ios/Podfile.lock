@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - union_ad (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - union_ad (from `.symlinks/plugins/union_ad/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  union_ad:
+    :path: ".symlinks/plugins/union_ad/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  union_ad: e146063338c51170f57bfd17727914aa06a0bb2e
+
+PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d
+
+COCOAPODS: 1.10.0
