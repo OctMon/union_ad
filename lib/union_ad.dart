@@ -9,13 +9,13 @@ class UnionAd {
   UnionAd._();
 
   ///sdk注册初始化
-  static Future<bool> register({
+  static Future<bool> registerAd({
     @required String iosAppId,
     @required String androidAppId,
     String appName,
     bool debug,
   }) async {
-    return await _channel.invokeMethod("register", {
+    return await _channel.invokeMethod("registerAd", {
       "iosAppId": iosAppId,
       "androidAppId": androidAppId,
       "appName": appName ?? "",

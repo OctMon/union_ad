@@ -15,7 +15,7 @@ public class TTAdManagerHolder {
     private static boolean sInit;
     private static String appId;
     private static String appName;
-    private static boolean debug;
+    public static boolean debug;
 
 
     public static TTAdManager get() {
