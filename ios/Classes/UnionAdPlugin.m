@@ -1,7 +1,15 @@
 #import "UnionAdPlugin.h"
 #import <BUAdSDK/BUAdSDK.h>
+#import "RewardedVideoAd.h"
+
+@interface UnionAdPlugin ()
+
+@property (nonatomic, strong) RewardedVideoAd *rewardedVideoAd;
+
+@end
 
 @implementation UnionAdPlugin
+
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
   FlutterMethodChannel* channel = [FlutterMethodChannel
       methodChannelWithName:@"union_ad"
@@ -21,7 +29,16 @@
         [BUAdSDKManager setAppID:arguments[@"iosAppId"]];
           
         result(@YES);
-    } else {
+    } else if ([@"loadRewardVideo" isEqualToString:call.method]) {
+        BURewardedVideoModel *model = [[BURewardedVideoModel alloc] init];
+    //    model.userId = @"123";
+        self.rewardedVideoAd = [[RewardedVideoAd alloc] initWithSlotID:arguments[@"codeIdIos"] rewardedVideoModel:model];
+        [self.rewardedVideoAd loadAdData];
+        result(@YES);
+        
+    } else if ([@"showRewardVideo" isEqualToString:call.method]) {
+        [self.rewardedVideoAd showRewardVideo];
+    }  else {
         result(FlutterMethodNotImplemented);
     }
 }
