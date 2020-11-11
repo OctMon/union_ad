@@ -1,12 +1,15 @@
 PODS:
   - Bytedance-UnionAD (3.3.0.5)
   - Flutter (1.0.0)
+  - "permission_handler (5.0.1+1)":
+    - Flutter
   - union_ad (0.0.1):
     - Bytedance-UnionAD (~> 3.3.0.5)
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
   - union_ad (from `.symlinks/plugins/union_ad/ios`)
 
 SPEC REPOS:
@@ -16,13 +19,16 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
   union_ad:
     :path: ".symlinks/plugins/union_ad/ios"
 
 SPEC CHECKSUMS:
   Bytedance-UnionAD: 7fc15b173b44303a548b25ec534e4c1b04263b21
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  union_ad: c3f1e454513642c4b3fdd851a8635b2aa41af903
+  permission_handler: eac8e15b4a1a3fba55b761d19f3f4e6b005d15b6
+  union_ad: 0cca985b27ef7d5b54ab7c28209ba3515be43782
 
 PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d
 
