@@ -1,8 +1,7 @@
 name: union_ad
 description: 字节跳动穿山甲广告插件
 version: 0.0.1
-author:
-homepage:
+homepage: https://github.com/OctMon/union_ad
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
