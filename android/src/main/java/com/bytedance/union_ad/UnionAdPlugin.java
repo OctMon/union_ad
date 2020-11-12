@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.bytedance.union_ad.config.TTAdManagerHolder;
 import com.bytedance.union_ad.reward_video.RewardVideo;
 
+import io.flutter.Log;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
@@ -70,6 +71,10 @@ public class UnionAdPlugin implements FlutterPlugin, MethodCallHandler, Activity
     } else {
       if(result != null){
         result.notImplemented();
+        if (TTAdManagerHolder.debug){
+          Log.e("UnionAdPlugin", "android notImplemented the method");
+          TToast.show(context, "android notImplemented the method");
+        }
       }
     }
   }

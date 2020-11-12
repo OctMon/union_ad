@@ -84,6 +84,8 @@ class UnionAd {
         case method_closed:
           closed();
           break;
+        default:
+          print('flutter notImplemented the method');
       }
 
       return;
