@@ -71,7 +71,7 @@
 
 - (void)rewardedVideoAdDidClose:(BURewardedVideoAd *)rewardedVideoAd {
     [UIApplication.sharedApplication setStatusBarHidden:NO];
-    [_unionAdChannel invokeMethod:@"close" arguments:nil result:nil];
+    [_unionAdChannel invokeMethod:@"closed" arguments:nil result:nil];
     BUD_Log(@"%s",__func__);
 }
 
