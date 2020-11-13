@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  permission_handler: ^5.0.1+1 # https://github.com/baseflowit/flutter-permission-handler
+#  permission_handler: ^5.0.1+1 # https://github.com/baseflowit/flutter-permission-handler
 
 dev_dependencies:
   flutter_test:

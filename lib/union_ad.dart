@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:permission_handler/permission_handler.dart';
+// import 'package:permission_handler/permission_handler.dart';
 
 class UnionAd {
   static const MethodChannel _channel = const MethodChannel('union_ad');
@@ -35,13 +35,13 @@ class UnionAd {
     });
 
     ///android 为了增加转化
-    if(Platform.isAndroid){
-      Map<Permission, PermissionStatus> statuses = await [
-        Permission.phone,
-        Permission.location,
-        Permission.storage,
-      ].request();
-    }
+    // if(Platform.isAndroid){
+    //   Map<Permission, PermissionStatus> statuses = await [
+    //     Permission.phone,
+    //     Permission.location,
+    //     Permission.storage,
+    //   ].request();
+    // }
 
     return register;
   }
