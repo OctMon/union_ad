@@ -14,6 +14,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _status = 'Unknown';
+  String _adIdForAdvertisers = '';
 
   ///官方测试id
   String testAppIdAndroid = '5001121';
@@ -34,7 +35,7 @@ class _MyAppState extends State<MyApp> {
       _status = "Success";
     });
     UnionAd.registerRewardAdCallback(
-      loadError: (){},
+      loadError: () {},
       loaded: () {},
       cached: () {},
       showed: () {},
@@ -43,6 +44,8 @@ class _MyAppState extends State<MyApp> {
       playComplete: () {},
       closed: () {},
     );
+    _adIdForAdvertisers = await UnionAd.getAdIdForAdvertisers();
+    setState(() {});
   }
 
   @override
@@ -54,6 +57,7 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
+            Text(_adIdForAdvertisers),
             Text(_status),
             RaisedButton(
               onPressed: () {

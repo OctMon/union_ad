@@ -16,6 +16,7 @@ class UnionAd {
   static const method_rewarded = 'rewarded';
   static const method_playComplete = 'playComplete';
   static const method_closed = 'closed';
+  static const method_adIdForAdvertisers = 'adIdForAdvertisers';
 
   UnionAd._();
 
@@ -26,7 +27,6 @@ class UnionAd {
     String appName,
     bool debug,
   }) async {
-
     bool register = await _channel.invokeMethod("registerAd", {
       "iosAppId": iosAppId,
       "androidAppId": androidAppId,
@@ -102,5 +102,10 @@ class UnionAd {
   ///展示激励视频广告
   static Future<bool> showRewardVideo() async {
     return await _channel.invokeMethod('showRewardVideo');
+  }
+
+  /// 获取IDFA
+  static Future<String> getAdIdForAdvertisers() async {
+    return await _channel.invokeMethod('adIdForAdvertisers');
   }
 }
