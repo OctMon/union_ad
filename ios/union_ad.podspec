@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.dependency 'Flutter'
   s.platform = :ios, '9.0'
 
-  s.dependency 'Bytedance-UnionAD', '~> 3.3.0.5'
+  s.dependency 'Bytedance-UnionAD'
   
   s.static_framework = true
    

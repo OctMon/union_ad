@@ -1,8 +1,8 @@
 PODS:
-  - Bytedance-UnionAD (3.3.0.5)
+  - Bytedance-UnionAD (3.3.6.2)
   - Flutter (1.0.0)
   - union_ad (0.0.1):
-    - Bytedance-UnionAD (~> 3.3.0.5)
+    - Bytedance-UnionAD
     - Flutter
 
 DEPENDENCIES:
@@ -20,9 +20,9 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/union_ad/ios"
 
 SPEC CHECKSUMS:
-  Bytedance-UnionAD: 7fc15b173b44303a548b25ec534e4c1b04263b21
+  Bytedance-UnionAD: e9f83939e2a5d857e104f6a91035bbf504b603e5
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  union_ad: 0cca985b27ef7d5b54ab7c28209ba3515be43782
+  union_ad: afa51787070ffd93641c4b7f73a030948fcb6318
 
 PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d
 
